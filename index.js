@@ -28,7 +28,7 @@ function preload(){
     ctx.fillRect(canvas.clientWidth/4 - dartBoardWidth/2,canvas.clientHeight/2-dartBoardHeight/2,dartBoardWidth,dartBoardHeight);
     ctx.drawImage(document.getElementById("dartBoard"),canvas.clientWidth/4 - dartBoardWidth/2,canvas.clientHeight/2-250);
     ctx.drawImage(document.getElementById("pi"),dartBoardCenterx + dartBoardWidth/2 + 30,dartBoardCentery - 35);
-    ctx.drawImage(document.getElementById("pi"),dartBoardCenterx + dartBoardWidth/2 + 30,dartBoardWidth - 35);
+    ctx.drawImage(document.getElementById("pi"),dartBoardCenterx + dartBoardWidth/2 + 30,dartBoardWidth - 85);
 }
 
 function draw(x,y){
@@ -60,7 +60,7 @@ function outputThrow(throws,x,y){
     ctx.fillStyle = 'rgb(175,175,175)';
     ctx.fillRect(x-20,y-30,canvas.clientWidth,40);
     ctx.fillStyle = 'black';
-    ctx.font = "bold 32px Consolas";
+    ctx.font = "bold 28px Consolas";
     ctx.fillText(throws.toString(),x,y);
 }
 
@@ -76,8 +76,8 @@ function throwDart(throws){
     pi = 4 * (Tc/Ts);
     if(Math.abs(Math.PI - pi) <= Math.abs(Math.PI - bestpi)) {
         bestpi = pi;
-        outputPi(bestpi,dartBoardHeight + 15,dartBoardCentery + 50,canvas.clientHeight);
-        outputThrow(throws,1050,450);
+        outputPi(bestpi,dartBoardHeight - 30,dartBoardCentery + 50,canvas.clientHeight);
+        outputThrow(throws,1010,398);
     }
 }
 
@@ -93,18 +93,18 @@ function reset(){
 function clears(){
     preload();
     step = throwNum + 1;
-    outputPi(0,dartBoardCentery + 15,dartBoardCentery - dartBoardHeight/2,dartBoardCentery - 35);
-    outputPi(0,dartBoardHeight + 15,dartBoardCentery + 50,canvas.clientHeight);
+    outputPi(0,dartBoardCentery + 15,dartBoardCentery - dartBoardHeight/2,dartBoardCentery - 20);
+    outputPi(0,dartBoardHeight - 30,dartBoardCentery + 50,canvas.clientHeight);
     document.getElementById("dartNum").value = 0;
 }
 
 async function main(){
     preload();
-    outputPi(pi,dartBoardCentery + 15,dartBoardCentery - dartBoardHeight/2,dartBoardCentery - 35);
-    outputPi(bestpi,dartBoardHeight + 15,dartBoardCentery + 50,canvas.clientHeight);
+    outputPi(pi,dartBoardCentery + 15,dartBoardCentery - dartBoardHeight/2,dartBoardCentery - 20);
+    outputPi(bestpi,dartBoardHeight - 30,dartBoardCentery + 50,canvas.clientHeight);
     for(step = 1; step<=throwNum; step++) {
         throwDart(step);
-        if(step%(skipsteps*8) == 0 || step<8) outputPi(pi,dartBoardCentery + 15,dartBoardCentery - dartBoardHeight/2,dartBoardCentery - 35);
+        if(step%(skipsteps*8) == 0 || step<8) outputPi(pi,dartBoardCentery + 15,dartBoardCentery - dartBoardHeight/2,dartBoardCentery - 20);
         if(step%skipsteps == 0) {
             await sleep(1);
         }
